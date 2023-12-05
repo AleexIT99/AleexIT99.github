@@ -35,24 +35,24 @@
           appId: "1:549825480403:web:081982af9583715d08b626"
         };
       
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const database = getDatabase(app);
-        window.crearRegistro = function () {
-            const nombre = document.getElementById("nombre").values;
-            const edad = document.getElementById("edad").values;
-            console.log(nombre, edad);
+         // Initialize Firebase
+         const app = initializeApp(firebaseConfig);
+            const database = getDatabase(app);
 
-            push(
-                ref(database, 'aleex'),
-                {
-                    name: nombre,
-                    age: edad
-                }
-            );
+            window.crearRegistro = function () {
+                const nombre = document.getElementById("nombre").value;
+                const edad = document.getElementById("edad").value;
+                console.log(nombre, edad);
+                
+                push(
+                    ref(database, 'Aleex'),
+                    {
+                        name: nombre,
+                        age: edad 
+                    }
+                );
 
-
-        }
+            }
       </script>
 </body>
 </html>
