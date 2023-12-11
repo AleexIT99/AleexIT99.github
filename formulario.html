@@ -4,54 +4,270 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-image: url('https://e0.pxfuel.com/wallpapers/416/911/desktop-wallpaper-futbol.jpg'); /* Reemplaza 'ruta/de/tu/imagen.jpg' con la ruta de tu imagen de fondo */
+    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+    background-position: center; /* Centra la imagen en el fondo */
+    font-family: Arial, sans-serif; /* Establece una fuente de texto predeterminada */
+    color: #ffffff; /* Establece el color de texto predeterminado */
+}
+
+
+        #crud-form {
+            
+            align-items: center;
+            justify-content: center;
+            width: 400px; /* Ajusta el ancho según tus necesidades */
+            padding: 30px;
+            border: 1px solid #1d181a;
+            border-radius: 5px;
+            background-color: #ff336b; /* Color de fondo */
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1d181a;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s; /* Efecto de transición */
+        }
+
+        button:hover {
+            background-color: #1d181a;
+        }
+    </style>
 </head>
 <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-body-tertiary fixed-top">
+        <div class="container-fluid ms-5">
+            <a class="navbar-brand" href="file:///home/alexander/Documentos/FutbolRM/index.html">
+                <img src="img/CR7-Logo-1.png" alt="Bootstrap" width="120px" height="60px">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="historia.html">Historia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="galeria.html">Galeria</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="formulario.html">Formulario</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Equipos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="real.html">Real Madrid</a></li>
+                            <li><a class="dropdown-item" href="juve.html">Juventus</a></li>
+                            <li><a class="dropdown-item" href="alnassr.html">Al Nassr</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     
-    <form id="crud-form">
+      <br>
+      <br>
+
+      <div class="container text-center">
+        <div class="row">
+            <h1>FORMULARIO VENTA DE CAMISETAS DE EQUIPOS DE FUTBOL</h1>
+            <h2>Realiza tu pedido</h2>
+        </div>
+      </div>
+ 
+    <div class="container text-center">
+    <center><form id="crud-form">
+        <input type="hidden" id="registro-id">
         <label for="nombre">Nombre:</label>
-        <input type="text" id = "nombre">
-        <label for="edad">Edad:</label>
-        <input type="number" id = "edad">
-        <button type="button" onclick="crearRegistro()">Crear</button>
-    </form>
+        <input type="text" id="nombre">
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" required>
+        <label for="equipo">Equipo:</label>
+        <select id="equipo" required>
+            <option value="seleccionar" disabled selected>Seleccionar equipo</option>
+            <option value="barcelona">Barcelona</option>
+            <option value="real-madrid">Real Madrid</option>
+            <option value="manchester-united">Manchester United</option>
+        </select>
+        <label for="talla">Talla:</label>
+        <select id="talla" required>
+            <option value="seleccionar" disabled selected>Seleccionar talla</option>
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+            <option value="xl">XL</option>
+        </select>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" min="1" required>
+        <br>
+        <button type="button" onclick="guardarRegistro()">Guardar Pedido</button>
+    </form></center>
+</div>
+    <br>
+    <br>
 
-
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-        import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
-      
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-          apiKey: "AIzaSyCFmywA9G6FIT4oOd2KtX9QhNRwKNKa3Y4",
-          authDomain: "pro-septimo.firebaseapp.com",
-          databaseURL: "https://pro-septimo-default-rtdb.firebaseio.com",
-          projectId: "pro-septimo",
-          storageBucket: "pro-septimo.appspot.com",
-          messagingSenderId: "549825480403",
-          appId: "1:549825480403:web:081982af9583715d08b626"
-        };
-      
-         // Initialize Firebase
-         const app = initializeApp(firebaseConfig);
-            const database = getDatabase(app);
-
-            window.crearRegistro = function () {
-                const nombre = document.getElementById("nombre").value;
-                const edad = document.getElementById("edad").value;
-                console.log(nombre, edad);
+    <div class="container text-center">
+    <h1>LISTADO DE LOS PEPIDOS</h1>
+</div>
+    <br>
+    <div class="container text-center">
+    <table class="table">
+        <thead>
+            <tr>
                 
-                push(
-                    ref(database, 'Aleex'),
-                    {
-                        name: nombre,
-                        age: edad 
-                    }
-                );
+                <th>NOMBRE</th>
+                <th>CORREO</th>
+                <th>EQUIPO</th>
+                <th>TALLA</th>
+                <th>CANTIDAD</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody id="data-list"></tbody>
+    </table>
+</div>
+    
+    <!-- ... tu código HTML anterior ... -->
 
-            }
-      </script>
+<script type="module">
+    // Importa las funciones que necesitas de los SDK que necesitas
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { getDatabase, ref, push, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-database.js";
+
+    // Tu configuración de Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBMJsVpnbOwVOiVNbTZScZdet9qlGigDL0",
+        authDomain: "conexion-8ec0d.firebaseapp.com",
+        databaseURL: "https://conexion-8ec0d-default-rtdb.firebaseio.com",
+        projectId: "conexion-8ec0d",
+        storageBucket: "conexion-8ec0d.appspot.com",
+        messagingSenderId: "679910299749",
+        appId: "1:679910299749:web:9800b464879628b4850e8c"
+    };
+
+
+    // Inicializa Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    window.guardarRegistro = function () {
+        const nombre = document.getElementById("nombre").value;
+        const email = document.getElementById("email").value;
+        const equipo = document.getElementById("equipo").value;
+        const talla = document.getElementById("talla").value;
+        const cantidad = document.getElementById("cantidad").value;
+        const id = document.getElementById("registro-id").value;
+
+        if (id) {
+            // Si hay un ID, actualiza el registro existente
+            update(ref(database, `Kevin_Guanochanga/${id}`), {
+                nombre: nombre,
+                correo: email,
+                equipo: equipo,
+                talla: talla,
+                cantidad: cantidad
+            });
+        } else {
+            // Si no hay un ID, agrega un nuevo registro
+            push(
+                ref(database, 'Kevin_Guanochanga'),
+                {
+                    nombre: nombre,
+                    correo: email,
+                    equipo: equipo,
+                    talla: talla,
+                    cantidad: cantidad
+                }
+            );
+        }
+
+        // Limpia el formulario después de crear o actualizar
+        document.getElementById("crud-form").reset();
+        document.getElementById("registro-id").value = "";
+    }
+
+    window.eliminarRegistro = function (id) {
+        // Elimina el registro
+        remove(ref(database, `Kevin_Guanochanga/${id}`));
+    }
+
+    window.editarRegistro = function (id, nombre, email, equipo, talla, cantidad) {
+        // Llena el formulario con los datos del registro seleccionado
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("email").value = email;
+        document.getElementById("equipo").value = equipo;
+        document.getElementById("talla").value = talla;
+        document.getElementById("cantidad").value = cantidad;
+
+        // Almacena el ID del registro que se está editando
+        document.getElementById("registro-id").value = id;
+    }
+
+    // Escucha los cambios en la referencia 'Surfboards' y actualiza la tabla
+    onValue(ref(database, 'Kevin_Guanochanga'), (snapshot) => {
+        const dataList = document.getElementById('data-list');
+        dataList.innerHTML = ""; // Limpia los datos existentes
+
+        // Itera a través de cada hijo y agrega una fila a la tabla
+        snapshot.forEach((childSnapshot) => {
+            const data = childSnapshot.val();
+            const id = childSnapshot.key;
+
+            const row = `
+                <tr>
+                    
+                    <td>${data.nombre}</td>
+                    <td>${data.correo}</td>
+                    <td>${data.equipo}</td>
+                    <td>${data.talla}</td>
+                    <td>${data.cantidad}</td>
+                    <td>
+                        <button class="btn btn-warning" onclick="editarRegistro('${id}', '${data.nombre}', '${data.correo}', '${data.equipo}', '${data.talla}', '${data.cantidad}')">Editar</button>
+                        <button class="btn btn-danger" onclick="eliminarRegistro('${id}')">Eliminar</button>
+                    </td>
+                </tr>
+            `;
+            dataList.innerHTML += row;
+        });
+    });
+</script>
+
+<!-- ... tu código HTML posterior ... -->
+
+
+    <footer class="bg-dark text-light text-center py-3">
+        <div class="container">
+            <p>&copy; 2023 Tu Empresa. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 </body>
 </html>
